@@ -1,0 +1,186 @@
+----------------------------------------
+
+VimOutliner (VO) basics Yooo !
+
+Source VimOutliner:
+	http://www.vim.org/scripts/script.php?script_id=3515
+	https://github.com/vimoutliner/vimoutliner
+
+Docu réalisé à l'aide de: 
+	http://www.troubleshooters.com/projects/vimoutliner/download/0.3.0/vo_README.otl
+	http://peterstuifzand.nl/gtd-vimoutliner.html
+	https://github.com/vimoutliner/vimoutliner/blob/master/doc/votl_cheatsheet.txt
+
+---------------------------------------
+
+
+	* Utilisation:
+		Extension des fichiers VO
+			: .otl
+		Plugins et scripts VO
+			: ~/$HOME/.vim/vimoutliner/
+
+	* Text wraping et formatting:
+		Body Text:	
+			: Toute ligne commençant pas ": " correspond à du Body Text, où VO
+			: fait du text-wrapping par défaut. Ce qui veut dire qu'on peut
+			: écrire n'importe quoi n'importe comment on s'en branle le texte
+			: est 'justifié' et le retour à la ligne se fait automatiquement.
+			: Et si jamais y a un bug de formattage, il suffit juste de
+			: sélectionner la zone en mode visual puis entrer la commande 'gq'
+			: pour forcer le reformattage. C'est d'la bombe.
+		Forcer le formattage:
+			: Pour tester le formattage forcé,
+			: prendre ces 6 lignes
+			: en mode visual puis entrer la commande
+			: 'gq'.
+			: D'la frappe.
+			:
+			: A noter que la commande 'gq' pour formatter peut servir à tout
+			: type de texte autre que body. 
+
+	* Tree expand/collapse:
+		Tree ~= liste déroulante:
+			: Dans VO, des lignes consécutives de même niveau (i.e. même
+			: indentation) peuvent pliées et dépliées sous la ligne précédente
+			: la plus proche avec un niveau d'indentation inférieur (notion
+			: d'arbre et de père/fils).
+			:
+			: Pour plier/déplier ce texte,
+			: 1. mettre le curseur sur l'une de ces lignes vertes
+			: 2. en mode édition, appuyer sur 'zc' pour plier, 'zo' pour déplier
+			:
+			: Note: on peut plier/déplier à n'importe quel niveau.
+		Collapse/extend à l'échelle de tout le fichier:
+			: VO permet de se focaliser rapidement sur un niveau d'indentation
+			: choisi.
+			:
+			: Pour comprendre comment ça marche: 
+			: 1. passer en mode édition
+			: 2. rentrer la commande ',,1', puis ',,2', puis ',,3', .... jusqu'à ',,9'
+			: 3. entrer ',,0' pour déplier tout le document
+
+	* VO Tags:
+		Tags <=> liens interfichiers:
+			: VO met en place un système de tags permettant de naviguer entre
+			: plusieurs fichiers .otl. On vient d'utiliser ce système de tags pour
+			: arriver sur ce fichier.
+			:
+			: Pour générer et utiliser un tag dans un ficher test.otl:
+			: 1. rajouter les deux lignes suivantes dans test.otl:
+			: 	 _tag_vo_test_
+			: 	 	./another_file_in_same_dir.otl
+			: 2. dans un terminal, générer $HOME/.vimoutliner/vo_tags.tag):
+			: 		~/.vim/vimoutliner/scripts/vo_maketags.pl test.otl
+			: 3. vérifier le fichier $HOME/.vimoutliner/vo_tags.tag a été généré
+			: 4. reouvrir test.otl dans vim
+			: 5. placer le curseur sur l'une des lettres de _tag_vo_test_
+			: 6. Ctrl-K pour basculer vers ./another_file_in_same_dir.otl
+			: 7. Ctrl-N pour revenir sur ./test.otl
+
+	* Complétion:
+		Complétion au mot:
+			: Pas trop capté ni chercher à capter comment ça marche, mais en
+			: commençant à écrire certain mots (genre ceux qui ont déjà été
+			: écrits au moins 1 fois dans le fichier), puis en appuyant sur
+			: Ctrl-N (toujours en mode insertion) alors une auto-complétion
+			: est proposée.
+			:
+			: Simple test: écrire les 3 premières lettres de compression et
+			: appuyer sur Ctrl-N.
+		Complétion à la ligne:
+			: Même principe que complétion au mot, mais pour toute une ligne.
+			:
+			: Pour tester, commencer par écrire "Même principe" sur une
+			: nouvelle ligne, puis appuyer consécutivement sur Ctrl-X et
+			: Ctrl-L (toujours en mode insertion).
+
+	* Checkbox yeah:
+		Création et utilisation de checkbox avec VO:
+			: En mode édition, entrer la commande ',,cb' (sans les guillemets)
+			: pour créer une checkbox vide, puis ',,cx' pour la cocher. 
+			:
+			: [_] Checkbox non-cochée (juste ,,cb) 
+			: [X] Checkbox cochée (,,cb puis ,,cx)
+			:
+			: J'ai remarqué que c'était un peu galère de créer des checkbox
+			: dans du Body Text. Faut enlever les ':', créer la checkbox, puis
+			: remettre les ':'.
+			:
+			: Un truc stylé, on peut faire des checkbox imbriquées avec un
+			: pourcentage de complétion des tâches sur la checkbox racine.
+			: On crée la checkbox racine avec ',,cp', ensuite on créé quelques
+			: checkbox simples avec ',,cb' qu'on va indenter sous la checkbox
+			: racine. Puis on coche l'une d'entre elles et le 0% de la checkbox
+			: racine se met à jour automatiquement. On peut forcer le calcul
+			: du pourcentage en positionnant le curseur sur la checkbox racine
+			: puis en appuyant sur ',,cz' en mode édition.
+			:
+			: [_] 0% Tâche aggrégée.
+			:	[X]	Tâche 1
+			:	[_] Tâche 2
+			:
+			
+	* Ma TODO list
+		[_] 		voir si y a d'autres trucs cool dans VO 
+		[_] 		customiser mon .vimoutlinerrc
+		[_] 25% 	voir comment exporter
+			[_]			en pdf
+			[_] 50%		en html 
+				[X] 		tester le script par défaut
+				[_] 		faire notre script maison
+
+	* Export un fichier .orl:
+		Exporter en pdf:
+			: Dans la TODO list tonton.
+		Exporter en html:
+			: De base, c'est possible via le script python livré par défaut avec VO:
+			: 	.vim/vimoutliner/scripts/otl2html.py test.otl > test.html
+			:
+			: Mais design pourri qui respire les années 90, et les tags ne
+			: sont pas traduits en href, dommage. Donc ça serait stylé qu'on
+			: se fasse notre propre script non?
+
+
+	* Rappel commandes:
+		En mode édition:
+			: ,,1		set foldlevel=0
+			: ,,2       set foldlevel=1
+			: ,,3		
+			: ,,4
+			: ,,5
+			: ,,6		[...]
+			: ,,7
+			: ,,8
+			: ,,9		set foldlevel=9
+			: ,,0		set foldlevel=99999
+			:
+			: ,,f		view current directory listing	
+			:
+			: gq		formatte la partie sélectionnée avec visual block
+			:
+			: zc		collapse le tree là où le curseur se trouve
+			: zo/z0		expand le tree là où le curseur se trouve			
+			: 
+			: >>		ajoute une indentation à la ligne où le curseur se trouve (possibilité 
+			: 			de le faire sur tout un tree une fois collapsé, sinon utiliser le visual block mode)
+			: <<		enlève une indentation ...
+			:
+			: >			pareil que '>>' mais pour un groupe de lignes sélectionnées en mode visual
+			: <			pareil que '<<' mais pour un groupe de lignes sélectionnées en mode visual
+			:
+			: Ctrl-K 		bascule sur le fichier pointé par le tag
+			: Ctrl-N		revient sur le fichier où le tag se trouve
+			:
+			: ,,cb		Créé une checkbox (1 checkbox par ligne max)
+			: ,,cx		Cocher une checkbox
+			: ,,cp		Créer une checkbox avec %
+			: ,,cz		Calculer le % de complétion pour une checkbox
+		En mode édition et/ou insertion:
+			: ,,-		trace une ligne droite
+			: ,,d		insère un datestamp
+			: ,,t		insère un timestamp
+		En mode édition:
+			: Ctrl-N					complétion sur un mot
+			: Ctrl-X puis Ctrl-N		complétion sur une ligne
+
