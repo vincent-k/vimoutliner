@@ -84,7 +84,7 @@ use strict;
 use vars qw($TAGFILENAME);
 use Cwd;
 
-$TAGFILENAME = $ENV{"HOME"} . "/.vim/vimoutliner/vo_tags.tag";
+$TAGFILENAME = $ENV{"HOME"} . "/.vim/bundle/vimoutliner/vo_tags.tag";
 ##### OLD LOCATION BELOW, REMOVE IN 0.3.6, COMMENT FOR NOW
 #$TAGFILENAME = $ENV{"HOME"} . "/.vimoutliner/vo_tags.tag";
 
