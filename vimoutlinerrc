@@ -38,6 +38,8 @@ let maplocalleader = ',,'		" uncomment for compatibility with
 
 colorscheme vo_dark
 
+hi Normal guibg=NONE ctermbg=NONE
+
 "Checkbox Tags
 " Tags can contain any word characters (:help word)
 " tags must not contain whitespace
